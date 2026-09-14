@@ -1,0 +1,349 @@
+:host {
+  display: block;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.auth-page {
+  --black: #090c10;
+  --black-2: #0d1117;
+  --card: #11161c;
+
+  --yellow: #f4c542;
+  --yellow-bright: #ffd84d;
+
+  --teal: #31c6b1;
+
+  --white: #f5f1e8;
+  --muted: #9ba2ad;
+
+  min-height: 100vh;
+  background: var(--black);
+  color: var(--white);
+
+  font-family:
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 20px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.auth-glow {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  top: -250px;
+  right: -150px;
+
+  background: rgba(244, 197, 66, .08);
+
+  filter: blur(100px);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.auth-container {
+  width: 100%;
+  max-width: 430px;
+
+  position: relative;
+  z-index: 2;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  margin-bottom: 30px;
+
+  color: var(--white);
+  text-decoration: none;
+
+  font-size: 24px;
+  font-weight: 800;
+
+  letter-spacing: -1px;
+}
+
+.logo svg {
+  width: 32px;
+  height: 32px;
+}
+
+.logo span span {
+  color: var(--yellow);
+  font-weight: 500;
+}
+
+.auth-card {
+  padding: 38px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(17, 22, 28, .98),
+      rgba(13, 17, 23, .98)
+    );
+
+  border: 1px solid rgba(255,255,255,.09);
+
+  border-radius: 16px;
+
+  box-shadow:
+    0 30px 80px rgba(0,0,0,.35),
+    inset 0 0 40px rgba(255,255,255,.012);
+}
+
+.auth-heading {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.eyebrow {
+  color: var(--yellow);
+
+  font-size: 9px;
+  font-weight: 800;
+
+  letter-spacing: 2px;
+}
+
+.auth-heading h1 {
+  margin: 10px 0 9px;
+
+  font-size: 28px;
+  line-height: 1.15;
+
+  letter-spacing: -1px;
+}
+
+.auth-heading p {
+  margin: 0;
+
+  color: var(--muted);
+
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+form {
+  display: grid;
+  gap: 20px;
+}
+
+.form-group {
+  display: grid;
+  gap: 8px;
+}
+
+.form-group label {
+  color: #d9dce0;
+
+  font-size: 11px;
+  font-weight: 650;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.label-row a {
+  color: var(--yellow);
+
+  font-size: 10px;
+
+  text-decoration: none;
+}
+
+.form-group input {
+  width: 100%;
+  height: 46px;
+
+  padding: 0 13px;
+
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 7px;
+
+  outline: none;
+
+  background: #0b0f14;
+
+  color: var(--white);
+
+  font-size: 12px;
+
+  transition: .2s;
+}
+
+.form-group input::placeholder {
+  color: #555d67;
+}
+
+.form-group input:focus {
+  border-color: rgba(244,197,66,.65);
+
+  box-shadow:
+    0 0 0 3px rgba(244,197,66,.08);
+}
+
+.login-button {
+  width: 100%;
+  height: 46px;
+
+  border: 0;
+  border-radius: 7px;
+
+  background: var(--yellow);
+  color: #090c10;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  font-size: 12px;
+  font-weight: 800;
+
+  cursor: pointer;
+
+  transition: .2s;
+}
+
+.login-button:hover {
+  background: var(--yellow-bright);
+  transform: translateY(-2px);
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  margin: 25px 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+
+  height: 1px;
+
+  flex: 1;
+
+  background: rgba(255,255,255,.08);
+}
+
+.divider span {
+  color: #555d67;
+
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.signup-text {
+  text-align: center;
+
+  color: #777f89;
+
+  font-size: 11px;
+
+  margin: 0;
+}
+
+.signup-text a {
+  color: var(--yellow);
+
+  font-weight: 700;
+
+  text-decoration: none;
+}
+
+.auth-footer {
+  text-align: center;
+
+  color: #4f5660;
+
+  font-size: 9px;
+
+  margin: 22px 0 0;
+}
+
+@media (max-width: 520px) {
+
+  .auth-page {
+    padding: 25px 15px;
+  }
+
+  .auth-card {
+    padding: 28px 22px;
+  }
+
+  .auth-heading h1 {
+    font-size: 25px;
+  }
+
+}
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrapper input {
+  width: 100%;
+  padding-right: 48px;
+  box-sizing: border-box;
+}
+
+.password-toggle {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+  color: #8b949e;
+
+  cursor: pointer;
+  padding: 0;
+}
+
+.password-toggle:hover {
+  color: #f4c542;
+}
+
+.password-toggle svg {
+  display: block;
+}

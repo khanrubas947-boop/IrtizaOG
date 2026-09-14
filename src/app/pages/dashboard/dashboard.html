@@ -1,0 +1,633 @@
+<div class="dashboard-page">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <a class="sidebar-logo" routerLink="/">
+      <svg viewBox="0 0 42 42" aria-hidden="true">
+        <polygon
+          points="21,3 39,21 21,39 3,21"
+          fill="#F4C542"
+        />
+        <polygon
+          points="21,11 31,21 21,31 11,21"
+          fill="#090C10"
+        />
+      </svg>
+
+      <span>
+        quick<span>desk</span>
+      </span>
+    </a>
+
+    <nav class="sidebar-nav">
+
+      <a
+        routerLink="/dashboard"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="nav-item"
+      >
+        <span class="nav-icon">▣</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a
+        routerLink="/tasks"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">□</span>
+        <span>Tickets</span>
+      </a>
+
+      <a
+        routerLink="/team"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">◇</span>
+        <span>Projects</span>
+      </a>
+
+      <a
+        routerLink="/clients"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">▤</span>
+        <span>Knowledge Base</span>
+      </a>
+
+      <a
+        routerLink="/clients"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">♧</span>
+        <span>Customers</span>
+      </a>
+
+      <a
+        routerLink="/reports"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">⌁</span>
+        <span>Reports</span>
+      </a>
+
+      <a
+        routerLink="/settings"
+        routerLinkActive="active"
+        class="nav-item"
+      >
+        <span class="nav-icon">⚙</span>
+        <span>Settings</span>
+      </a>
+
+    </nav>
+
+    <div class="sidebar-bottom">
+
+      <div class="upgrade-card">
+        <span class="upgrade-label">QUICKDESK PRO</span>
+
+        <strong>
+          Unlock more<br />
+          powerful tools.
+        </strong>
+
+        <button type="button">
+          Upgrade →
+        </button>
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- MAIN -->
+  <main class="dashboard-main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+      <div>
+        <span class="page-eyebrow">WORKSPACE</span>
+        <h1>Dashboard</h1>
+      </div>
+
+      <div class="topbar-actions">
+
+        <!-- SEARCH -->
+        <div class="search-box">
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="7"
+            />
+
+            <path d="m20 20-4-4" />
+          </svg>
+
+          <input
+            type="text"
+            placeholder="Search..."
+            [(ngModel)]="searchQuery"
+          />
+
+          <span class="search-shortcut">
+            ⌘ K
+          </span>
+
+        </div>
+
+
+        <!-- NOTIFICATIONS -->
+        <button
+          type="button"
+          class="notification-button"
+          aria-label="Notifications"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+          >
+            <path
+              d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"
+            />
+
+            <path d="M10 21h4" />
+          </svg>
+
+          <span class="notification-dot"></span>
+
+        </button>
+
+
+        <!-- PROFILE -->
+        <div class="profile-menu">
+
+          <button
+            type="button"
+            class="profile-button"
+            aria-label="Account"
+            (click)="toggleProfileMenu()"
+          >
+            A
+          </button>
+
+          @if (profileMenuOpen) {
+
+            <div class="profile-dropdown">
+
+              <div class="profile-dropdown-header">
+
+                <strong>
+                  Account
+                </strong>
+
+                <span>
+                  QuickDesk workspace
+                </span>
+
+              </div>
+
+              <button
+                type="button"
+                class="logout-button"
+                (click)="logout()"
+              >
+
+                <span>↪</span>
+
+                Logout
+
+              </button>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- CONTENT -->
+    <section class="dashboard-content">
+
+      <!-- WELCOME -->
+      <div class="welcome-row">
+
+        <div>
+
+          <h2>
+            Good morning 👋
+          </h2>
+
+          <p>
+            Here's what's happening with your workspace today.
+          </p>
+
+        </div>
+
+        <button
+          class="primary-button"
+          type="button"
+        >
+          + Create Ticket
+        </button>
+
+      </div>
+
+
+      <!-- STATS -->
+      <div class="stats-grid">
+
+        @for (stat of stats; track stat.label) {
+
+          <div class="stat-card">
+
+            <div class="stat-top">
+
+              <span>
+                {{ stat.label }}
+              </span>
+
+              <span class="stat-menu">
+                •••
+              </span>
+
+            </div>
+
+            <div class="stat-bottom">
+
+              <strong>
+                {{ stat.value }}
+              </strong>
+
+              <span
+                class="stat-change"
+                [class.negative]="!stat.positive"
+              >
+                ↗ {{ stat.change }}
+              </span>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+
+      <!-- MAIN GRID -->
+      <div class="dashboard-grid">
+
+        <!-- CHART -->
+        <section class="panel chart-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h3>
+                Tickets Overview
+              </h3>
+
+              <p>
+                Ticket activity during the week
+              </p>
+
+            </div>
+
+            <div class="chart-legend">
+
+              <span>
+                <i class="legend-dot yellow"></i>
+                This Week
+              </span>
+
+              <span>
+                <i class="legend-dot gray"></i>
+                Last Week
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="chart">
+
+            <div class="chart-y">
+              <span>150</span>
+              <span>100</span>
+              <span>50</span>
+              <span>0</span>
+            </div>
+
+            <div class="chart-area">
+
+              <div class="grid-line line-1"></div>
+              <div class="grid-line line-2"></div>
+              <div class="grid-line line-3"></div>
+              <div class="grid-line line-4"></div>
+
+              <svg
+                class="chart-svg"
+                viewBox="0 0 700 250"
+                preserveAspectRatio="none"
+              >
+
+                <polyline
+                  class="chart-line previous"
+                  points="
+                    0,175
+                    45,145
+                    90,165
+                    135,185
+                    180,165
+                    225,178
+                    270,150
+                    315,168
+                    360,145
+                    405,160
+                    450,145
+                    495,170
+                    540,155
+                    585,175
+                    630,135
+                    700,155
+                  "
+                />
+
+                <polyline
+                  class="chart-line current"
+                  points="
+                    0,125
+                    45,65
+                    90,115
+                    135,150
+                    180,105
+                    225,55
+                    270,125
+                    315,75
+                    360,105
+                    405,115
+                    450,80
+                    495,110
+                    540,105
+                    585,125
+                    630,35
+                    700,80
+                  "
+                />
+
+              </svg>
+
+              <div class="chart-days">
+
+                <span>Mon</span>
+                <span>Tue</span>
+                <span>Wed</span>
+                <span>Thu</span>
+                <span>Fri</span>
+                <span>Sat</span>
+                <span>Sun</span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- RECENT TICKETS -->
+        <section class="panel tickets-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h3>
+                Recent Tickets
+              </h3>
+
+              <p>
+                Latest activity
+              </p>
+
+            </div>
+
+            <a routerLink="/tasks">
+              View all
+            </a>
+
+          </div>
+
+
+          <div class="ticket-list">
+
+            @for (ticket of filteredTickets; track ticket.id) {
+
+              <div class="ticket-item">
+
+                <div class="ticket-avatar">
+                  {{ ticket.initials }}
+                </div>
+
+                <div class="ticket-info">
+
+                  <strong>
+                    {{ ticket.title }}
+                  </strong>
+
+                  <span>
+                    {{ ticket.id }}
+                  </span>
+
+                </div>
+
+                <span
+                  class="ticket-status"
+                  [class.open]="ticket.statusClass === 'open'"
+                  [class.progress]="ticket.statusClass === 'progress'"
+                  [class.pending]="ticket.statusClass === 'pending'"
+                >
+                  {{ ticket.status }}
+                </span>
+
+              </div>
+
+            }
+
+            @if (filteredTickets.length === 0) {
+
+              <div class="empty-state">
+                No tickets found.
+              </div>
+
+            }
+
+          </div>
+
+        </section>
+
+      </div>
+
+
+      <!-- BOTTOM CARDS -->
+      <div class="bottom-grid">
+
+        <!-- TEAM ACTIVITY -->
+        <section class="panel activity-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h3>
+                Team Activity
+              </h3>
+
+              <p>
+                Latest workspace activity
+              </p>
+
+            </div>
+
+            <a routerLink="/team">
+              View team
+            </a>
+
+          </div>
+
+          <div class="activity-list">
+
+            <div class="activity-item">
+
+              <span class="activity-avatar">
+                A
+              </span>
+
+              <p>
+                <strong>Alex</strong>
+                updated a ticket
+                <span>8 min ago</span>
+              </p>
+
+            </div>
+
+
+            <div class="activity-item">
+
+              <span class="activity-avatar purple">
+                S
+              </span>
+
+              <p>
+                <strong>Sarah</strong>
+                created a project
+                <span>24 min ago</span>
+              </p>
+
+            </div>
+
+
+            <div class="activity-item">
+
+              <span class="activity-avatar teal">
+                M
+              </span>
+
+              <p>
+                <strong>Mike</strong>
+                resolved a ticket
+                <span>1 hour ago</span>
+              </p>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- PERFORMANCE -->
+        <section class="panel performance-panel">
+
+          <div class="panel-header">
+
+            <div>
+
+              <h3>
+                Performance
+              </h3>
+
+              <p>
+                This month's workspace health
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="performance-content">
+
+            <div class="performance-score">
+
+              <strong>
+                94
+              </strong>
+
+              <span>
+                / 100
+              </span>
+
+            </div>
+
+
+            <div class="performance-bar">
+              <span></span>
+            </div>
+
+
+            <div class="performance-meta">
+
+              <span>
+                Excellent
+              </span>
+
+              <span>
+                +7.4%
+              </span>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  </main>
+
+</div>
